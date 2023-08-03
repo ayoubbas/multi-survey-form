@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 // import TextField from './step/@mui/material/TextField';
 
-function Step1({ data, handleChange }) {
+function Step1({ data,myError, handleChange }) {
+  console.log(myError);
   return (
     <div
       style={{
@@ -22,10 +23,10 @@ function Step1({ data, handleChange }) {
         noValidate
         autoComplete="off"
       >
-        <form onSubmit={handleChange} style={{ display: "flex", flexDirection: "column" }}>
-          <TextField id="firstName" label="First Name" variant="standard" />
-          <TextField id="lastName" label="Last Name" variant="standard" />
-          <TextField id="email" label="Email" variant="standard" />
+        <form  style={{ display: "flex", flexDirection: "column" }}>
+          <TextField error={myError.firstName} id="firstName" label="First Name" variant="standard" name="firstName" defaultValue={data.firstName} onChange={handleChange} />
+          <TextField error={myError.lastName} id="lastName" label="Last Name" variant="standard" name="lastName"  defaultValue={data.lastName} onChange={handleChange}/>
+          <TextField error={myError.email} id="email" label="Email" type="email" variant="standard" name="email"  defaultValue={data.email} onChange={handleChange}/>
         </form>
       </Box>
 
