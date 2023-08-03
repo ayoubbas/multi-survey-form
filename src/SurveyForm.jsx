@@ -49,7 +49,7 @@ function SurveyForm() {
   };
 
   return (
-    <Container maxWidth="xs" style={{marginTop:"100px",background:"red"}}>
+    <Container maxWidth="xs" style={{marginTop:"100px"}}>
 
     <div style={{background:"#eee" ,padding:"50px",borderRadius:"15px"}}>
       {renderStep()}
