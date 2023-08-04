@@ -7,10 +7,10 @@ import Container from "@mui/material/Container";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
+    <div className="App" style={{height:"100vh",display:"flex",justifyContent:"center",alignItems:"center" ,background:"#001C30"}}>
+      {/* <Navbar /> */}
       
-      <Container maxWidth="md" style={{height:"85vh",display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <Container maxWidth="md">
         <SurveyForm  />
       </Container>
     </div>

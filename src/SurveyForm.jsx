@@ -4,7 +4,9 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
-
+import axios from "axios";
+// const axios = require('axios/dist/node/axios.cjs');
+// import Email from 'smtpjs';
 function SurveyForm() {
   const [step, setStep] = useState(1);
   const [myError, setMyError] = useState({
@@ -14,7 +16,6 @@ function SurveyForm() {
     occupation: false,
     city: false,
     phone: false,
-
   });
   const [userData, setUserData] = useState({
     firstName: "",
@@ -23,8 +24,26 @@ function SurveyForm() {
     occupation: "",
     city: "",
     phone: "",
-
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/api/formdata", userData);
+      alert("Form data saved successfully!");
+      setUserData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        occupation: "",
+        city: "",
+        phone: "",
+      });
+    } catch (error) {
+      console.error("Error saving form data:", error);
+      alert("Error saving form data");
+    }
+  };
 
   const handleNextStep = () => {
     const lettersRegex = /^[a-zA-Z]+$/;
@@ -34,12 +53,12 @@ function SurveyForm() {
     if (step === 1) {
       let hasError = false;
 
-      if (userData.firstName === ""|| !lettersRegex.test(userData.firstName)) {
+      if (userData.firstName === "" || !lettersRegex.test(userData.firstName)) {
         setMyError((prevMyError) => ({ ...prevMyError, firstName: true }));
         hasError = true;
       }
 
-      if (userData.lastName === ""|| !lettersRegex.test(userData.lastName)) {
+      if (userData.lastName === "" || !lettersRegex.test(userData.lastName)) {
         setMyError((prevMyError) => ({ ...prevMyError, lastName: true }));
         hasError = true;
       }
@@ -56,12 +75,15 @@ function SurveyForm() {
     if (step === 2) {
       let hasError = false;
 
-      if (userData.occupation === ""|| !lettersRegex.test(userData.occupation)) {
+      if (
+        userData.occupation === "" ||
+        !lettersRegex.test(userData.occupation)
+      ) {
         setMyError((prevMyError) => ({ ...prevMyError, occupation: true }));
         hasError = true;
       }
 
-      if (userData.city === ""|| !lettersRegex.test(userData.city)) {
+      if (userData.city === "" || !lettersRegex.test(userData.city)) {
         setMyError((prevMyError) => ({ ...prevMyError, city: true }));
         hasError = true;
       }
@@ -69,15 +91,13 @@ function SurveyForm() {
         setMyError((prevMyError) => ({ ...prevMyError, phone: true }));
         hasError = true;
       }
-      
+
       // next step
       if (!hasError) {
         setStep(step + 1);
       }
     }
-
   };
-  
 
   const handlePreviousStep = () => {
     setStep(step - 1);
@@ -101,10 +121,12 @@ function SurveyForm() {
     }));
   };
 
-  const handleSubmit = () => {
-    // Perform form submission logic here, e.g., send data to the server
-    console.log("User Data:", userData);
-  };
+  // const handleSubmit = () => {
+  //   // Perform form submission logic here, e.g., send data to the server
+  //   module.exports = userData;
+
+  //   console.log("User Data:", userData);
+  // };
 
   const renderStep = () => {
     switch (step) {
@@ -145,16 +167,28 @@ function SurveyForm() {
           }}
         >
           {step < 3 ? (
-            <Button onClick={handleNextStep} variant="contained">
+            <Button
+              onClick={handleNextStep}
+              style={{ background: "#64CCC5" }}
+              variant="contained"
+            >
               Continue
             </Button>
           ) : (
-            <Button onClick={handleSubmit} variant="contained">
+            <Button
+              style={{ background: "#64CCC5" }}
+              onClick={handleSubmit}
+              variant="contained"
+            >
               Submit
             </Button>
           )}
           {step > 1 && (
-            <Button onClick={handlePreviousStep} variant="outlined">
+            <Button
+              style={{ color: "#64CCC5", borderColor: "#64CCC5" }}
+              onClick={handlePreviousStep}
+              variant="outlined"
+            >
               Previous
             </Button>
           )}
