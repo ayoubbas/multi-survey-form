@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
+import Step4 from "./steps/Step4";
 import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
-import axios from "axios";
-// const axios = require('axios/dist/node/axios.cjs');
-// import Email from 'smtpjs';
+import { collection, addDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
+import { myConfig } from "./firebas";
+import firebase from "firebase/compat/app";
+import "firebase/firestore";
+import "firebase/storage"; // Import the firebase/app module
+import { db } from "./firebas";
+
 function SurveyForm() {
+  firebase.initializeApp(myConfig);
   const [step, setStep] = useState(1);
+  const [fromFirebase, setFromFirebase] = useState("");
   const [myError, setMyError] = useState({
     firstName: false,
     lastName: false,
@@ -26,25 +34,40 @@ function SurveyForm() {
     phone: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  // hundle submit button 💦💦💦💦💦💦💦💦💦
+
+  const handleSubmit = async () => {
     try {
-      await axios.post("/api/formdata", userData);
-      alert("Form data saved successfully!");
-      setUserData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        occupation: "",
-        city: "",
-        phone: "",
+      const docRef = await addDoc(collection(db, "formData"), {
+        data: userData,
       });
-    } catch (error) {
-      console.error("Error saving form data:", error);
-      alert("Error saving form data");
+      console.log("Document written with ID: ", docRef.id);
+      await fetchPost();
+      setStep(step + 1);
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
   };
 
+    // fetching the data from firebase 💦💦💦💦💦💦💦💦💦
+
+  const fetchPost =useCallback(async () => {
+    await getDocs(collection(db, "formData")).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(userData, newData);
+      setFromFirebase(newData);
+    });
+  },[userData]) ;
+  useEffect(() => {
+    fetchPost();
+  }, [fetchPost]);
+
+
+  // next button to another page 💦💦💦💦💦💦💦💦💦
   const handleNextStep = () => {
     const lettersRegex = /^[a-zA-Z]+$/;
     const phoneRegex = /^\d{10,}$/;
@@ -99,10 +122,12 @@ function SurveyForm() {
     }
   };
 
+  // preveious to return the last page 💦💦💦💦💦💦💦💦💦
   const handlePreviousStep = () => {
     setStep(step - 1);
   };
 
+  // set if there an error in an input or not 💦💦💦💦💦💦💦💦💦
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMyError({
@@ -121,13 +146,20 @@ function SurveyForm() {
     }));
   };
 
-  // const handleSubmit = () => {
-  //   // Perform form submission logic here, e.g., send data to the server
-  //   module.exports = userData;
+  // button of add user 💦💦💦💦💦💦💦💦💦
+  const addUser = () => {
+    setStep(1);
+    setUserData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      occupation: "",
+      city: "",
+      phone: "",
+    });
+  };
 
-  //   console.log("User Data:", userData);
-  // };
-
+  
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -143,58 +175,77 @@ function SurveyForm() {
           <Step2
             data={userData}
             myError={myError}
+            setData={setUserData}
+            userData={userData}
             handleChange={handleChange}
           />
         );
       case 3:
         return <Step3 data={userData} handleChange={handleChange} />;
+      case 4:
+        return <Step4 datas={fromFirebase} handleChange={handleChange} />;
       default:
         return null;
     }
   };
 
   return (
-    <Container maxWidth="xs" style={{}}>
-      <div
-        style={{ background: "#eee", padding: "50px", borderRadius: "15px" }}
-      >
-        {renderStep()}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: "30px",
+    <>
+      {fromFirebase &&  (
+        <Button
+          onClick={() => {
+            setStep(4);
           }}
+          style={{ background: "#00ADB5", marginBottom: "10px" }}
+          variant="contained"
         >
-          {step < 3 ? (
-            <Button
-              onClick={handleNextStep}
-              style={{ background: "#64CCC5" }}
-              variant="contained"
-            >
-              Continue
-            </Button>
-          ) : (
-            <Button
-              style={{ background: "#64CCC5" }}
-              onClick={handleSubmit}
-              variant="contained"
-            >
-              Submit
-            </Button>
-          )}
-          {step > 1 && (
-            <Button
-              style={{ color: "#64CCC5", borderColor: "#64CCC5" }}
-              onClick={handlePreviousStep}
-              variant="outlined"
-            >
-              Previous
-            </Button>
-          )}
+          show data
+        </Button>
+      )}
+      <Container maxWidth={step === 4 ? "lg" : "xs"}>
+        <div
+          style={{ background: "#eee", padding: "50px", borderRadius: "15px" }}
+        >
+          {renderStep()}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "30px",
+            }}
+          >
+            {step < 3 ? (
+              <Button
+                onClick={handleNextStep}
+                style={{ background: "#00ADB5" }}
+                variant="contained"
+              >
+                Continue
+              </Button>
+            ) : (
+              <>
+                <Button
+                  style={{ background: "#00ADB5" }}
+                  onClick={step < 4 ? handleSubmit : addUser}
+                  variant="contained"
+                >
+                  {step === 4 ? "Add User" : "Submit"}
+                </Button>
+              </>
+            )}
+            {step > 1 && step !== 4 && (
+              <Button
+                style={{ color: "#00ADB5", borderColor: "#00ADB5" }}
+                onClick={handlePreviousStep}
+                variant="outlined"
+              >
+                Previous
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 

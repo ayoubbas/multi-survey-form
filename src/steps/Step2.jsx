@@ -2,7 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-function Step2({ data,myError, handleChange }) {
+function Step2({ data, myError, handleChange}) {
+
+
   return (
     <div
       style={{
@@ -26,9 +28,35 @@ function Step2({ data,myError, handleChange }) {
           onSubmit={handleChange}
           style={{ display: "flex", flexDirection: "column" }}
         >
-          <TextField  error={myError.occupation} id="occupation" label="Occupation" variant="standard"  name="occupation" defaultValue={data.occupation}  onChange={handleChange}/>
-          <TextField error={myError.city} id="city" label="City" variant="standard"  name="city" defaultValue={data.city} onChange={handleChange}/>
-          <TextField error={myError.phone} id="phone" type="number" label="Phone Number" variant="standard"  name="phone" defaultValue={data.phone} onChange={handleChange}/>
+          <TextField
+            error={myError.occupation}
+            id="occupation"
+            label="Occupation"
+            variant="standard"
+            name="occupation"
+            defaultValue={data.occupation}
+            onChange={handleChange}
+          />
+          <TextField
+            error={myError.city}
+            id="city"
+            label="City"
+            variant="standard"
+            name="city"
+            defaultValue={data.city}
+            onChange={handleChange}
+          />
+          <TextField
+            error={myError.phone}
+            id="phone"
+            type="number"
+            label="Phone Number"
+            variant="standard"
+            name="phone"
+            defaultValue={data.phone}
+            onChange={handleChange}
+          />
+
         </form>
       </Box>
 
