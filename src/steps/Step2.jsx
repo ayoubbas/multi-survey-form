@@ -12,21 +12,21 @@ function Step2({ data, myError, handleChange}) {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        width:'100%',
       }}
     >
       <h2>Enter Personal Details</h2>
 
       <Box
         component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "40ch" },
-        }}
+
         noValidate
         autoComplete="off"
+        style={{width:"100%"}}
       >
         <form
           onSubmit={handleChange}
-          style={{ display: "flex", flexDirection: "column" }}
+          style={{ display: "flex", flexDirection: "column" ,width:"100%" }}
         >
           <TextField
             error={myError.occupation}

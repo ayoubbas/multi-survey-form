@@ -204,7 +204,7 @@ function SurveyForm() {
       )}
       <Container maxWidth={step === 4 ? "lg" : "xs"}>
         <div
-          style={{ background: "#eee", padding: "50px", borderRadius: "15px" }}
+          style={{ background: "#eee", padding: "50px 15px", borderRadius: "15px" }}
         >
           {renderStep()}
           <div
