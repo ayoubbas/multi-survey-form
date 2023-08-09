@@ -8,6 +8,8 @@ function App() {
     <div className="App" style={{height:"100vh",display:"flex",justifyContent:"center",alignItems:"center" ,flexDirection:"column" ,background:"#001C30"}}>      
       <Container  maxWidth="lg">
         <SurveyForm  />
+      {/* <div className="g-recaptcha" data-sitekey="6LcK640nAAAAADYu7TIXBfcgWVlv2HQHprv6SFMv"></div> */}
+
       </Container>
     </div>
   );
