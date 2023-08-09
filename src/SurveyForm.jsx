@@ -17,6 +17,11 @@ function SurveyForm() {
   firebase.initializeApp(myConfig);
   const [step, setStep] = useState(1);
   const [fromFirebase, setFromFirebase] = useState("");
+  const [recaptchaValue, setRecaptchaValue] = useState("");
+
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
+  };
   const [myError, setMyError] = useState({
     firstName: false,
     lastName: false,
@@ -32,6 +37,7 @@ function SurveyForm() {
     occupation: "",
     city: "",
     phone: "",
+    captcha:""
   });
 
 
@@ -178,6 +184,8 @@ function SurveyForm() {
             setData={setUserData}
             userData={userData}
             handleChange={handleChange}
+            recaptcha={setRecaptchaValue}
+            handleRecaptchaChange={handleRecaptchaChange}
           />
         );
       case 3:

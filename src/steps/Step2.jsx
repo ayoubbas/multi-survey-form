@@ -1,9 +1,11 @@
-import React from "react";
+import React  , {useState} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import ReCAPTCHA from "react-google-recaptcha";
-function Step2({ data, myError, handleChange}) {
 
+function Step2({ data, myError, handleChange,setRecaptchaValue,handleRecaptchaChange}) {
+
+  
 
   return (
     <div
@@ -56,7 +58,7 @@ function Step2({ data, myError, handleChange}) {
             defaultValue={data.phone}
             onChange={handleChange}
           />
-      <ReCAPTCHA sitekey="6LdPo5InAAAAAJIqW-PRMeE0deUKMYPxxHythNI_" />
+      <ReCAPTCHA name="captcha" sitekey="6LdPo5InAAAAAJIqW-PRMeE0deUKMYPxxHythNI_"  onChange={handleChange} />
         </form>
       </Box>
 
