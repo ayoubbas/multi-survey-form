@@ -21,6 +21,7 @@ function SurveyForm() {
 
   const handleRecaptchaChange = (value) => {
     setRecaptchaValue(value);
+    console.log(value);
   };
   const [myError, setMyError] = useState({
     firstName: false,

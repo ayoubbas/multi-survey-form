@@ -58,7 +58,7 @@ function Step2({ data, myError, handleChange,setRecaptchaValue,handleRecaptchaCh
             defaultValue={data.phone}
             onChange={handleChange}
           />
-      <ReCAPTCHA  sitekey="6LcJ65InAAAAACFuhMiH8v23kQNpTQhiwkkD5Vlb"  onChange={handleChange} />
+      <ReCAPTCHA name="captcha" sitekey="6LcJ65InAAAAACFuhMiH8v23kQNpTQhiwkkD5Vlb"  onChange={handleChange} />
         </form>
       </Box>
 
