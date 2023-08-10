@@ -31,10 +31,14 @@ function SurveyForm() {
         },
         body: JSON.stringify({ recaptcha: value }),
       });
-
-      const data = await response.json();
-      console.log(data);
-      // Handle verification response
+    
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        // Handle verification response
+      } else {
+        console.error("Error verifying reCAPTCHA:", response.statusText);
+      }
     } catch (error) {
       console.error("Error verifying reCAPTCHA:", error);
     }
