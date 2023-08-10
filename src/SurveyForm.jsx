@@ -34,7 +34,7 @@ function SurveyForm() {
     
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         // Handle verification response
       } else {
         console.error("Error verifying reCAPTCHA:", response.statusText);
