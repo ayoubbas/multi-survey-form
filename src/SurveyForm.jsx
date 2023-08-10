@@ -19,9 +19,25 @@ function SurveyForm() {
   const [fromFirebase, setFromFirebase] = useState("");
   const [recaptchaValue, setRecaptchaValue] = useState("");
 
-  const handleRecaptchaChange = (value) => {
+  const handleRecaptchaChange = async (value) => {
     setRecaptchaValue(value);
-    console.log(value);
+
+    // Example: Verify reCAPTCHA response
+    try {
+      const response = await fetch("/verify-recaptcha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ recaptcha: value }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      // Handle verification response
+    } catch (error) {
+      console.error("Error verifying reCAPTCHA:", error);
+    }
   };
   const [myError, setMyError] = useState({
     firstName: false,
