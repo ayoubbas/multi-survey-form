@@ -104,6 +104,7 @@ function SurveyForm() {
       }
       if (userData.captcha === false ) {
         // setMyError((prevMyError) => ({ ...prevMyError, captcha: true }));
+        console.log("fffffffffff");
         hasError = true;
       }
 
