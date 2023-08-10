@@ -22,12 +22,7 @@ function SurveyForm() {
   const handleRecaptchaChange = async (value) => {
     setRecaptchaValue(!!value);
     // console.log(recaptchaValue);
-
   };
-  useEffect(()=>{
-    console.log(recaptchaValue);
-    console.log("recaptchaValue");
-  },[recaptchaValue])
   const [myError, setMyError] = useState({
     firstName: false,
     lastName: false,
@@ -45,6 +40,11 @@ function SurveyForm() {
     phone: "",
     captcha:""
   });
+  useEffect(()=>{
+    console.log(recaptchaValue);
+    console.log("recaptchaValue");
+    setUserData({...userData, captcha:recaptchaValue})
+  },[recaptchaValue,userData])
 
 
   // hundle submit button 💦💦💦💦💦💦💦💦💦
