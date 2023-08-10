@@ -17,31 +17,11 @@ function SurveyForm() {
   firebase.initializeApp(myConfig);
   const [step, setStep] = useState(1);
   const [fromFirebase, setFromFirebase] = useState("");
-  const [recaptchaValue, setRecaptchaValue] = useState("");
+  const [recaptchaValue, setRecaptchaValue] = useState(false);
 
   const handleRecaptchaChange = async (value) => {
-    setRecaptchaValue(value);
-
-    // Example: Verify reCAPTCHA response
-    try {
-      const response = await fetch("/verify-recaptcha", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ recaptcha: value }),
-      });
-    
-      if (response.ok) {
-        const data = await response.json();
-        // console.log(data);
-        // Handle verification response
-      } else {
-        console.error("Error verifying reCAPTCHA:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error verifying reCAPTCHA:", error);
-    }
+    setRecaptchaValue(!!value);
+    console.log(recaptchaValue);
   };
   const [myError, setMyError] = useState({
     firstName: false,
