@@ -40,12 +40,12 @@ function SurveyForm() {
     phone: "",
     captcha:""
   });
-  // useEffect(()=>{
-  //   console.log(recaptchaValue);
-  //   console.log("recaptchaValue");
-  //   setUserData({...userData, captcha:recaptchaValue})
-  //   console.log(userData);
-  // },[recaptchaValue,userData])
+  useEffect(()=>{
+    console.log(recaptchaValue);
+    console.log("recaptchaValue");
+    setUserData({...userData, captcha:recaptchaValue})
+    console.log(userData);
+  },[recaptchaValue])
 
 
   // hundle submit button 💦💦💦💦💦💦💦💦💦
