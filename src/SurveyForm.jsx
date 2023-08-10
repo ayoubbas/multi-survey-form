@@ -21,8 +21,11 @@ function SurveyForm() {
 
   const handleRecaptchaChange = async (value) => {
     setRecaptchaValue(!!value);
-    console.log(recaptchaValue);
+    // console.log(recaptchaValue);
   };
+  useEffect(()=>{
+    console.log(recaptchaValue);
+  },[recaptchaValue])
   const [myError, setMyError] = useState({
     firstName: false,
     lastName: false,
