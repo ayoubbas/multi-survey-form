@@ -14,6 +14,7 @@ function Step4 ({datas}){
                       <TableCell style={{textAlign:"center",fontWeight:"bold"}}>Occupation</TableCell>
                       <TableCell style={{textAlign:"center",fontWeight:"bold"}}>City</TableCell>
                       <TableCell style={{textAlign:"center",fontWeight:"bold"}}>Phone</TableCell>
+                      <TableCell style={{textAlign:"center",fontWeight:"bold"}}>Captcha</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -24,7 +25,7 @@ function Step4 ({datas}){
                         <TableCell style={{textAlign:"center" }}>{data.data.email}</TableCell>
                         <TableCell style={{textAlign:"center" }}>{data.data.occupation}</TableCell>
                         <TableCell style={{textAlign:"center" }}>{data.data.city}</TableCell>
-                        <TableCell style={{textAlign:"center" }}>{data.data.phone}</TableCell>
+                        <TableCell style={{textAlign:"center" }}>{data.data.captcha}</TableCell>
                       </TableRow>
                     )) }
                   </TableBody>

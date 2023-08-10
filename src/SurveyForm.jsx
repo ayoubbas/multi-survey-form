@@ -102,6 +102,10 @@ function SurveyForm() {
         setMyError((prevMyError) => ({ ...prevMyError, email: true }));
         hasError = true;
       }
+      if (userData.captcha === false ) {
+        // setMyError((prevMyError) => ({ ...prevMyError, captcha: true }));
+        hasError = true;
+      }
 
       // next step
       if (!hasError) {
@@ -150,6 +154,7 @@ function SurveyForm() {
       occupation: false,
       city: false,
       phone: false,
+      captcha: false, 
 
       // Add more fields as needed
     });
