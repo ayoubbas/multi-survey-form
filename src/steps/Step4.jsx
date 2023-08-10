@@ -25,6 +25,7 @@ function Step4 ({datas}){
                         <TableCell style={{textAlign:"center" }}>{data.data.email}</TableCell>
                         <TableCell style={{textAlign:"center" }}>{data.data.occupation}</TableCell>
                         <TableCell style={{textAlign:"center" }}>{data.data.city}</TableCell>
+                        <TableCell style={{textAlign:"center" }}>{data.data.phone}</TableCell>
                         <TableCell style={{textAlign:"center" }}>{data.data.captcha}</TableCell>
                       </TableRow>
                     )) }
