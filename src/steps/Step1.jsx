@@ -65,7 +65,7 @@ function Step1({
             onChange={handleChange}
           />
           <ReCAPTCHA
-            name="captcha"
+            // name="captcha"
             sitekey="6Le9_pUnAAAAAPz57O4Vpgy4g3UjG6JICw9MCcLs"
             onChange={handleRecaptchaChange}
           />
