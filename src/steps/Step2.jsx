@@ -1,7 +1,6 @@
 import React  , {useState} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import ReCAPTCHA from "react-google-recaptcha";
 
 function Step2({ data, myError, handleChange,setRecaptchaValue,handleRecaptchaChange}) {
 
@@ -58,7 +57,6 @@ function Step2({ data, myError, handleChange,setRecaptchaValue,handleRecaptchaCh
             defaultValue={data.phone}
             onChange={handleChange}
           />
-      <ReCAPTCHA name="captcha" sitekey="6LcJ65InAAAAACFuhMiH8v23kQNpTQhiwkkD5Vlb"  onChange={handleChange} />
         </form>
       </Box>
 

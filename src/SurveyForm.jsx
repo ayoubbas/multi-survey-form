@@ -21,7 +21,7 @@ function SurveyForm() {
 
   const handleRecaptchaChange = (value) => {
     setRecaptchaValue(value);
-    console.log(value);
+    console.log("value");
   };
   const [myError, setMyError] = useState({
     firstName: false,
@@ -175,6 +175,8 @@ function SurveyForm() {
             data={userData}
             myError={myError}
             handleChange={handleChange}
+            recaptcha={setRecaptchaValue}
+            handleRecaptchaChange={handleRecaptchaChange}
           />
         );
       case 2:
@@ -185,8 +187,7 @@ function SurveyForm() {
             setData={setUserData}
             userData={userData}
             handleChange={handleChange}
-            recaptcha={setRecaptchaValue}
-            handleRecaptchaChange={handleRecaptchaChange}
+            
           />
         );
       case 3:
