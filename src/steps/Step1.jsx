@@ -55,7 +55,7 @@ function Step1({
           />
           <TextField
             error={myError.email}
-            style={{ width: "100%" ,marginBottom:"10px" }}
+            style={{ width: "100%" , marginBottom:"10px" }}
             id="email"
             label="Email"
             type="email"
@@ -66,7 +66,7 @@ function Step1({
           />
           <ReCAPTCHA
             // name="captcha"
-            style={{ width: "100%" }}
+            // style={{ width: "100%" }}
             sitekey="6Le9_pUnAAAAAPz57O4Vpgy4g3UjG6JICw9MCcLs"
             onChange={handleRecaptchaChange}
           />
