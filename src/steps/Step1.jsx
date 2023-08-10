@@ -55,7 +55,7 @@ function Step1({
           />
           <TextField
             error={myError.email}
-            style={{ width: "100%" }}
+            style={{ width: "100%" ,marginBottom:"10px" }}
             id="email"
             label="Email"
             type="email"
