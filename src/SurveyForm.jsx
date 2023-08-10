@@ -44,6 +44,7 @@ function SurveyForm() {
     console.log(recaptchaValue);
     console.log("recaptchaValue");
     setUserData({...userData, captcha:recaptchaValue})
+    console.log(userData);
   },[recaptchaValue,userData])
 
 
